@@ -1,6 +1,6 @@
 # Web Development Elective - Next JS :rocket:
 
-This is the repository for the elective subject "Full Stack Development with Next JS" as part of the third semester of the Web Development academy at Qinshift Academy. During this elective we will create a full stack web application that is going to be a clone of the popular Twitter web application, mimicking its core functionalities.
+This is the repository for the elective subject "Full Stack Development with Next JS" as part of the third semester of the Web Development academy at Avenga Academy. During this elective we will create a full stack web application that is going to be a clone of the popular Twitter web application, mimicking its core functionalities.
 
 ## Table of Contents
 
@@ -26,9 +26,9 @@ Even though this subject is intended for students who were part of the JavaScrip
 
 ## Why you should learn Next JS
 
-Next JS is the currently most popular framework for building server-side rendered (SSR) React applications. It's the modern way to quickly build scalable web applications. Even though is fairly new, it has already gained a lot of popularity and adoption by big companies like Vercel. Even if you don't end up using it after this elective, it's a good skill to have under your belt, as it will be a very good addition to your skillset.
+Next JS is the currently the most popular framework for building server-side rendered (SSR) React applications. It's the modern way to quickly build scalable web applications. Even though is fairly new, it has already gained a lot of popularity and adoption by big companies like Vercel. Even if you don't end up using it after this elective, it's a good skill to have under your belt, as it will be a very good addition to your skillset.
 
-As Next JS is a React framework, it's also a good way to get familiar with React, which is the most popular library for building user interfaces.
+As Next JS is a React framework, it's also a good way to get familiar with React, which is a very popular library for building user interfaces.
 
 ## Tech Stack
 
