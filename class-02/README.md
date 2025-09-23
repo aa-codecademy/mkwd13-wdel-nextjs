@@ -8,10 +8,11 @@ In this module we are setting up the Next.js project. We are going to use the [s
 
 1. npx shadcn@latest init
    ^this will add cn (tailwind merge) for you in utils, no need to do it manually like we did in class
-2. npx shadcn@latest add tabs
-3. npx shadcn@latest add button
-4. npx shadcn@latest add textarea
-5. npx shadcn@latest add input
+2. npx shadcn@latest add avatar
+3. npx shadcn@latest add tabs
+4. npx shadcn@latest add button
+5. npx shadcn@latest add textarea
+6. npx shadcn@latest add input
 
 - Which style would you like to use? › Default
 - Which color would you like to use as base color? › Slate
