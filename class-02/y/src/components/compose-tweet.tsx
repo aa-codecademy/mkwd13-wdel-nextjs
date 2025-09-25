@@ -2,8 +2,13 @@
 
 import { AvatarFallback } from "@radix-ui/react-avatar";
 import { Avatar, AvatarImage } from "./ui/avatar";
+import { useState } from "react";
+import { Textarea } from "./ui/textarea";
+import { Button } from "./ui/button";
 
 export default function ComposeTweet() {
+  const [value, setValue] = useState("");
+
   return (
     <div className="flex flex-row p-4 gap-4 border-b-2 border-gray-600">
       <div>
@@ -15,8 +20,21 @@ export default function ComposeTweet() {
           <AvatarFallback>Avatar</AvatarFallback>
         </Avatar>
       </div>
-      <div>This is where the textarea is going to be rendered.</div>
-      <div>This is where the button is going to be rendered.</div>
+      <div className="w-full flex flex-col items-end">
+        <Textarea
+          className="w-full border-t-0 border-l-0 border-r-0 rounded-none"
+          placeholder="Compose your tweet..."
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+        />
+        <Button
+          className="mt-2 rounded-full bg-blue-500 hover:bg-blue-600 text-white cursor-pointer"
+          disabled={!value}
+          onClick={() => console.log(value)}
+        >
+          Post
+        </Button>
+      </div>
     </div>
   );
 }
