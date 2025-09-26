@@ -5,12 +5,12 @@ import { Avatar, AvatarImage } from "./ui/avatar";
 import { useState } from "react";
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
-import { TweetType } from "@/types/tweet-type.enum";
 import { submitTweet } from "@/actions/create-tweet.action";
+// import { TweetType } from "@/types/tweet-type.enum";
 // import { TweetModel } from "@/db/schemas/tweet.schema";
 // import { TweetType } from "@/types/tweet-type.enum";
 
-export default function ComposeTweet({ onSubmit = () => void 0 }) {
+export default function ComposeTweet() {
   const [value, setValue] = useState("");
   // const [originalTweet, setOriginalTweet] = useState<TweetModel>();
   // const [type, setType] = useState<TweetType>(TweetType.Tweet);
@@ -32,7 +32,6 @@ export default function ComposeTweet({ onSubmit = () => void 0 }) {
         action={async (formData) => {
           await submitTweet(formData);
 
-          onSubmit();
           setValue("");
         }}
       >
