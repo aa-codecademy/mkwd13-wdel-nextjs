@@ -1,6 +1,6 @@
 import postgres from "postgres";
 import { drizzle } from "drizzle-orm/postgres-js";
-import { tweets } from "./schemas/tweet.schema";
+import { tweets, tweetsRelations } from "./schemas/tweet.schema";
 import { users } from "./schemas/user.schema";
 
 const client = postgres({
@@ -12,7 +12,7 @@ const client = postgres({
 });
 
 export const db = drizzle(client, {
-  schema: { tweets, users },
+  schema: { tweets, users, tweetsRelations },
   logger: true,
 });
 

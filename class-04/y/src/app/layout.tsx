@@ -29,7 +29,7 @@ export default function RootLayout({
       >
         <main className="min-h-screen flex flex-col items-center">
           <article className="flex flex-row w-full h-screen">
-            <section className="px-16 py-10">
+            <section className="w-80 px-4 py-2">
               <Sidebar />
             </section>
             <section className="w-full border-gray-600 border-l-2 p-0">

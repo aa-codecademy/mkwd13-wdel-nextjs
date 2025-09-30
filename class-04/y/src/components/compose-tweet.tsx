@@ -6,15 +6,9 @@ import { useState } from "react";
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
 import { submitTweet } from "@/actions/create-tweet.action";
-// import { TweetType } from "@/types/tweet-type.enum";
-// import { TweetModel } from "@/db/schemas/tweet.schema";
-// import { TweetType } from "@/types/tweet-type.enum";
 
 export default function ComposeTweet() {
   const [value, setValue] = useState("");
-  // const [originalTweet, setOriginalTweet] = useState<TweetModel>();
-  // const [type, setType] = useState<TweetType>(TweetType.Tweet);
-  // const [repliedToId, setRepiledToId] = useState("");
 
   return (
     <div className="flex flex-row p-4 gap-4 border-b-2 border-gray-600">
@@ -42,7 +36,6 @@ export default function ComposeTweet() {
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />
-        {/* <input type="hidden" /> */}
         <Button
           className="mt-2 rounded-full bg-blue-500 hover:bg-blue-600 text-white cursor-pointer"
           disabled={!value}

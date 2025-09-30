@@ -1,5 +1,5 @@
-import Feed from "@/components/feed";
+import { redirect } from "next/navigation";
 
 export default function Home() {
-  return <Feed />;
+  redirect("/feed/for-you");
 }
