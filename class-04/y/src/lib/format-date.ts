@@ -1,6 +1,13 @@
-export function formatDate(createdAt: string): string {
+export function formatDate(createdAt: string | Date): string {
   // Get current time
   const now = new Date();
+
+  // Ensure that createdAt is always a Date object.
+  // Sometimes data from the database comes as a string (e.g. "2025-10-07T12:00:00Z").
+  // So this line checks:
+  // If createdAt (param) is already a Date, keep it.
+  // Otherwise, convert it from a string -> Date object.
+  createdAt = createdAt instanceof Date ? createdAt : new Date(createdAt);
 
   // Calculate the difference (in seconds) between now and the given date
   const diffInSeconds = Math.floor(

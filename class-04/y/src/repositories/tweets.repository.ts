@@ -11,6 +11,12 @@ export const find = (searchTerm: string | null): Promise<TweetModel[]> => {
     // ilike(...) produces a SQL `ILIKE` expression (Postgres) for case-insensitive search.
     return db.query.tweets.findMany({
       where: ilike(tweets.text, `%${searchTerm ?? ""}`),
+      // "with" tells Drizzle to include (join) related
+      // instead of just the tweet itself
+      with: {
+        // Include the tweet that this one replied to (if it's a reply)
+        repliedTo: true,
+      },
     });
   } catch (error) {
     console.log(error);
