@@ -1,5 +1,7 @@
 import { pgTable, uuid, varchar, timestamp, unique } from "drizzle-orm/pg-core";
-import { InferInsertModel, InferSelectModel } from "drizzle-orm";
+import { InferInsertModel, InferSelectModel, relations } from "drizzle-orm";
+import { follows } from "./users_follows.schema";
+import { usersLikedTweets } from "./user_liked_tweets";
 
 export const users = pgTable(
   "users",
@@ -23,6 +25,12 @@ export const users = pgTable(
   (t) => ({ unq: unique().on(t.username) })
 );
 
+export const usersRelations = relations(users, ({ many }) => ({
+  following: many(follows, { relationName: "follows" }),
+  followers: many(follows, { relationName: "followers" }),
+  likedTweets: many(usersLikedTweets),
+}));
+
 // UserModel - the shape of a user record coming out of the database (SELECT result).
 // InferSelectModel<typeof users> gives you the TypeScript type of rows you read from the users table (what SELECT returns)
 export type UserModel = InferSelectModel<typeof users>;
@@ -33,3 +41,15 @@ export type UserCreateModel = InferInsertModel<typeof users>;
 
 // INSERT type: reflects which fields are required and which are optional during insertion
 // SELECT type: reflects what the DB wil return after the row exists (with defaults applied).
+
+// type testType = {
+//   followers: UserModel[];
+//   following: UserModel[];
+// };
+
+// export type UserExtendedModel = UserModel & testType;
+
+export type UserExtendedModel = UserModel & {
+  followers: UserModel[];
+  following: UserModel[];
+};

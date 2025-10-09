@@ -1,6 +1,8 @@
 import { pgTable, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
 import { TweetType } from "@/types/tweet-type.enum";
 import { InferInsertModel, InferSelectModel, relations } from "drizzle-orm";
+import { usersLikedTweets } from "./user_liked_tweets";
+import { UserModel, users } from "./user.schema";
 
 export const tweets = pgTable("tweets", {
   id: uuid("id").primaryKey().defaultRandom(),
@@ -18,6 +20,7 @@ export const tweets = pgTable("tweets", {
   // These allow us to connect tweets to other tweets
   originalTweetId: uuid("original_tweet_id"),
   repliedToId: uuid("replied_to_id"),
+  authorId: uuid("author_id").notNull(),
 });
 
 export const tweetsRelations = relations(tweets, ({ one, many }) => ({
@@ -43,7 +46,12 @@ export const tweetsRelations = relations(tweets, ({ one, many }) => ({
 
   // A tweet can be liked by many users
   // This usually goes through a join table 'usersLikedTweets; (userId -> tweetId);
-  // likes
+  likes: many(usersLikedTweets),
+  author: one(users, {
+    fields: [tweets.authorId], // tweet.authorId is the Foreign Key
+    references: [users.id], // users.id is the Primary Key on the users table
+    relationName: "author",
+  }),
 }));
 
 export type TweetModel = InferSelectModel<typeof tweets>;
@@ -53,6 +61,9 @@ export type TweetExtendedModel = TweetModel & {
   reposts: TweetModel[]; // list of tweets that reposted this tweet
   replies: TweetModel[]; // list of direct replies to this tweet
   repliedTo: TweetModel; // the tweet this one replied to (if any)
+  originalTweet: TweetModel;
+  likes: UserModel[];
+  author: UserModel;
 };
 
 // TweetModel & { ... } is an intersection type.

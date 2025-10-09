@@ -8,6 +8,7 @@ export async function submitTweet(formData: FormData) {
   // If text's missing, use an empty string by default
   const tweet: TweetCreateModel = {
     text: (formData.get("text") as string) || "",
+    authorId: formData.get("authorId") as string,
   };
 
   // Call the service function to actually create and save the tweet in the db.

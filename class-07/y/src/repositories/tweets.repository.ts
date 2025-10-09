@@ -1,4 +1,4 @@
-import { eq, ilike } from "drizzle-orm";
+import { desc, eq, ilike } from "drizzle-orm";
 import { db } from "../db";
 import {
   TweetCreateModel,
@@ -13,9 +13,15 @@ export const find = (searchTerm: string | null): Promise<TweetModel[]> => {
       where: ilike(tweets.text, `%${searchTerm ?? ""}`),
       // "with" tells Drizzle to include (join) related
       // instead of just the tweet itself
+
+      // Sorts all tweets by creation date in descending order (newest first)
+      orderBy: desc(tweets.createdAt),
       with: {
         // Include the tweet that this one replied to (if it's a reply)
         repliedTo: true,
+        replies: true,
+        reposts: true,
+        likes: true,
       },
     });
   } catch (error) {

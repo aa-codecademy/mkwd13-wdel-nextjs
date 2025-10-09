@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import Sidebar from "../components/sidebar";
+import Providers from "./providers";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -27,16 +28,18 @@ export default function RootLayout({
           inter.variable
         )}
       >
-        <main className="min-h-screen flex flex-col items-center">
-          <article className="flex flex-row w-full h-screen">
-            <section className="w-80 px-4 py-2">
-              <Sidebar />
-            </section>
-            <section className="w-full border-gray-600 border-l-2 p-0">
-              {children}
-            </section>
-          </article>
-        </main>
+        <Providers>
+          <main className="min-h-screen flex flex-col items-center">
+            <article className="flex flex-row w-full h-screen">
+              <section className="w-80 px-4 py-2">
+                <Sidebar />
+              </section>
+              <section className="w-full border-gray-600 border-l-2 p-0">
+                {children}
+              </section>
+            </article>
+          </main>
+        </Providers>
       </body>
     </html>
   );

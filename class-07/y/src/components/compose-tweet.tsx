@@ -10,6 +10,7 @@ import { TweetModel } from "@/db/schemas/tweet.schema";
 import { TweetType } from "@/types/tweet-type.enum";
 import { useSearchParams } from "next/navigation";
 import { submitReply } from "@/actions/reply.action";
+import { useSession } from "next-auth/react";
 
 type ComposeTweetProps = {
   onSubmit?: () => void;
@@ -22,6 +23,7 @@ export default function ComposeTweet({
   const [originalTweet, setOriginalTweet] = useState<TweetModel>(); // Holds data of the tweet being replied to (if any)
   const [type, setType] = useState<TweetType>(TweetType.Tweet); // Type of tweet (Tweet or Reply)
   const [repliedToId, setRepliedToId] = useState(""); // ID of the tweet being replied to
+  const { data: session } = useSession();
 
   const searchParams = useSearchParams(); // Hook to read query parameters from the URL
 
@@ -93,6 +95,7 @@ export default function ComposeTweet({
           {/* A hidden input is a form element (<input type="hidden" /> that stores data you want to send to the server
           but don't want the user to see or edit directly in the UI) */}
           <input type="hidden" name="repliedToId" value={repliedToId} />
+          <input type="hidden" name="authorId" value={session?.user.id} />
           <Button
             className="mt-2 rounded-full bg-blue-500 hover:bg-blue-600 text-white cursor-pointer"
             disabled={!value}
