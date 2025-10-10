@@ -6,7 +6,12 @@ import {
   TweetCreateModel,
   TweetExtendedModel,
 } from "@/db/schemas/tweet.schema";
+import { getNextServerSession } from "@/lib/next-auth";
 import { create, find, findOneById } from "@/repositories/tweets.repository";
+import {
+  create as createLike,
+  deleteLike,
+} from "@/repositories/likes.repository";
 
 export const getTweets = async (searchTerm?: string | null) => {
   // call repository to get base tweets (type from repo: TweetModel[])
@@ -30,4 +35,24 @@ export const createTweet = async (tweet: TweetCreateModel) => {
 
   // Retrun the created row to the caller (controller or API route)
   return createdTweet;
+};
+
+export const likeTweet = async (tweetId: string) => {
+  const session = await getNextServerSession();
+
+  if (!session?.user.id) {
+    return;
+  }
+
+  await createLike(tweetId, session.user.id);
+};
+
+export const unlikeTweet = async (tweetId: string) => {
+  const session = await getNextServerSession();
+
+  if (!session?.user.id) {
+    return;
+  }
+
+  await deleteLike(tweetId, session.user.id);
 };

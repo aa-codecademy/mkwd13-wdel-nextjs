@@ -49,6 +49,8 @@ export default function ComposeTweet({
     }
   }, [searchParams, type]); // Re-run when search params or type changes
 
+  if (!session) return null;
+
   return (
     <>
       {/* If replying, show the original tweet being replied to */}

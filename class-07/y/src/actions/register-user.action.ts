@@ -14,5 +14,5 @@ export default async function registerUser(formData: FormData) {
   // Creates the user in the database
   await createUser(newUser);
 
-  // redirect("/login");
+  redirect("/login");
 }

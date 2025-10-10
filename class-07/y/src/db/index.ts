@@ -19,7 +19,16 @@ const client = postgres({
   port: 5432,
 });
 
-export const db = drizzle(client, {
+export const db = drizzle<{
+  tweets: typeof tweets;
+  users: typeof users;
+  follows: typeof follows;
+  usersLikedTweets: typeof usersLikedTweets;
+  tweetsRelations: typeof tweetsRelations;
+  usersRelations: typeof usersRelations;
+  usersFollowersRelations: typeof usersFollowersRelations;
+  usersLikedTweetsRelations: typeof usersLikedTweetsRelations;
+}>(client, {
   schema: {
     tweets,
     users,

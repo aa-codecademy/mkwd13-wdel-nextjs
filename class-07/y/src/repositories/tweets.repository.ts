@@ -10,7 +10,7 @@ export const find = (searchTerm: string | null): Promise<TweetModel[]> => {
   try {
     // ilike(...) produces a SQL `ILIKE` expression (Postgres) for case-insensitive search.
     return db.query.tweets.findMany({
-      where: ilike(tweets.text, `%${searchTerm ?? ""}`),
+      where: ilike(tweets.text, `%${searchTerm ?? ""}%`),
       // "with" tells Drizzle to include (join) related
       // instead of just the tweet itself
 
@@ -22,6 +22,7 @@ export const find = (searchTerm: string | null): Promise<TweetModel[]> => {
         replies: true,
         reposts: true,
         likes: true,
+        author: true,
       },
     });
   } catch (error) {
